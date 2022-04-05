@@ -5,12 +5,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from '@mui/material';
-import React, { ReactElement } from 'react';
-import { Need } from '../../../@types/helpers/Need';
+} from "@mui/material";
+import React, { ReactElement } from "react";
+import { ProductNeed } from "../../../@types/helpers/ProductNeed";
 
 interface Props {
-  needs: Need[];
+  needs: ProductNeed[];
 }
 
 export const NeedsTable = ({ needs }: Props): ReactElement => {

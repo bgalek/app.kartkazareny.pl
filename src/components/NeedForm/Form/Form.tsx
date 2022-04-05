@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from 'react';
+import React, { ReactElement, useContext, useState } from "react";
 import {
   Autocomplete,
   Button,
@@ -10,104 +10,100 @@ import {
   Input,
   InputAdornment,
   InputLabel,
-  MenuItem,
   Radio,
   RadioGroup,
-  Select,
-  Stack, TextField,
-} from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { Category } from '../../../@types/helpers/Category';
-import { Product } from '../../../@types/helpers/Product';
-import { Need } from '../../../@types/helpers/Need';
-import data from '../../../../data.json';
+  Stack,
+  TextField,
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { Category } from "../../../@types/helpers/Category";
+import { Product } from "../../../@types/helpers/Product";
+import { ProductNeed } from "../../../@types/helpers/ProductNeed";
+import { Language } from "../../../@types/shared/Language";
 
 interface Props {
   categories: Category[];
   products: Product[];
-  onSubmit: (need: Need) => void;
+  onSubmit: (need: ProductNeed) => void;
 }
 
-const formVariant = 'standard';
+const formVariant = "standard";
 
 const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   const { t, i18n } = useTranslation();
 
-  const [nameInput, setNameInput] = useState<string>('');
-  const [categoryInput, setCategoryInput] = useState<string>('');
-  const [productInput, setProductInput] = useState<string>('');
-  const [amountInput, setAmountInput] = useState<string>('');
-
-  const productsFromFile: {label: string, category: string}[] = data.items.map(it => ({ label: it.name, category: it.category }));
+  const [nameInput, setNameInput] = useState<string>("");
+  const [categoryInput, setCategoryInput] = useState<string>("all");
+  const [productInput, setProductInput] = useState<Product | null>(null);
+  const [amountInput, setAmountInput] = useState<string>("");
 
   const availableProducts: Product[] =
-    categoryInput !== ''
-      ? products.filter((product) => product.categoryId === categoryInput)
-      : [];
-
-  const adornment = productInput
-    ? products.find((product) => product.id === productInput)?.unit[
-        i18n.language as 'PL' | 'UA'
-      ]
-    : '';
+    categoryInput !== "all"
+      ? products.filter((product) => product.category.id === categoryInput)
+      : products;
 
   const resetForm = (fullReset = false) => {
-    setCategoryInput('');
-    setProductInput('');
-    setAmountInput('');
+    setCategoryInput("all");
+    setAmountInput("");
+    setProductInput(null);
 
     if (fullReset) {
-      setNameInput('');
+      setNameInput("");
     }
   };
 
   const handleSubmit = (): void => {
-    const elementToAdd: Need = {
-      name: nameInput,
-      categoryId: categoryInput,
-      productId: productInput,
+    const elementToAdd: ProductNeed = {
+      ...(productInput as Product),
+      volunteer: nameInput,
       amount: +amountInput,
-      inputLanguage: i18n.language,
     };
 
     onSubmit(elementToAdd);
+
+    console.log(productInput);
     resetForm();
   };
+
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setProductInput(null);
+    setCategoryInput(event.target.value);
+  };
+
+  const formValid = productInput && nameInput.length != 0 && +amountInput > 0;
 
   return (
     <FormGroup>
       <Stack spacing={3}>
-        <Autocomplete
-            options={productsFromFile.sort((a, b) => -b.category.localeCompare(a.category))}
-            groupBy={(option) => option.category}
-            getOptionLabel={(option) => option.label}
-            fullWidth
-            renderInput={(params) => <TextField {...params} label="Produkty"/>}
-        />
         <FormControl variant={formVariant} required>
-          <InputLabel htmlFor='name-input'>{t('Imię')}</InputLabel>
+          <InputLabel htmlFor="name-input">{t("Imię")}</InputLabel>
           <Input
             value={nameInput}
             onChange={(event) => setNameInput(event.target.value)}
-            id='name-input'
-            aria-describedby='name-input'
+            id="name-input"
+            aria-describedby="name-input"
             required
           />
         </FormControl>
 
         <FormControl variant={formVariant} required>
-          <FormLabel>{t('Kategoria')}</FormLabel>
-          <RadioGroup
-            value={categoryInput}
-            onChange={(event) => setCategoryInput(event.target.value)}
-          >
+          <FormLabel>{t("Kategoria")}</FormLabel>
+          <RadioGroup value={categoryInput} onChange={handleCategoryChange}>
+            <FormControlLabel
+              key="all"
+              value="all"
+              control={<Radio />}
+              label={t("Wszystkie")}
+            />
             {categories.map((category) => {
               return (
                 <FormControlLabel
                   key={category.id}
                   value={category.id}
                   control={<Radio />}
-                  label={category.name[i18n.language as 'PL' | 'UA']}
+                  label={category.name[i18n.language as Language]}
                 />
               );
             })}
@@ -119,50 +115,54 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
           required
           disabled={availableProducts.length === 0}
         >
-          <InputLabel htmlFor='product-input-label'>{t('Produkt')}</InputLabel>
-          <Select
-            labelId='product-input-label'
-            id='product-input'
+          <Autocomplete
             value={productInput}
-            label={t('Produkt')}
-            onChange={(event) => setProductInput(event.target.value)}
-          >
-            {availableProducts.map((product) => {
-              return (
-                <MenuItem key={product.id} value={product.id}>
-                  {product.name[i18n.language as 'PL' | 'UA']}
-                </MenuItem>
-              );
-            })}
-          </Select>
+            onChange={(event, value) => setProductInput(value)}
+            options={availableProducts}
+            groupBy={(option) =>
+              option.category.name[i18n.language as Language]
+            }
+            getOptionLabel={(option) => option.name[i18n.language as Language]}
+            fullWidth
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant={formVariant}
+                label={t("Produkt")}
+                required
+              />
+            )}
+          />
         </FormControl>
 
         <FormControl variant={formVariant} required>
-          <InputLabel htmlFor='amount-input'>{t('Ilość')}</InputLabel>
+          <InputLabel htmlFor="amount-input">{t("Ilość")}</InputLabel>
           <Input
             value={amountInput}
-            type='number'
+            type="number"
             onChange={(event) => setAmountInput(event.target.value)}
-            id='amount-input'
-            aria-describedby='amount-input'
+            id="amount-input"
+            aria-describedby="amount-input"
             endAdornment={
-              <InputAdornment position='end'>{adornment}</InputAdornment>
+              <InputAdornment position="end">
+                {productInput?.unit[i18n.language as Language]}
+              </InputAdornment>
             }
           />
         </FormControl>
-        <Grid container justifyContent='flex-end' columns={10}>
+        <Grid container justifyContent="flex-end" columns={10}>
           <Grid
             item
             xs={5}
             md={1}
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
             <Button
-              variant='text'
-              color='error'
+              variant="text"
+              color="error"
               onClick={() => resetForm(true)}
             >
-              {t('Wyczyść')}
+              {t("Wyczyść")}
             </Button>
           </Grid>
 
@@ -170,10 +170,15 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             item
             xs={5}
             md={1}
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
-            <Button variant='contained' onClick={handleSubmit} type='submit'>
-              {t('Prześlij')}
+            <Button
+              variant="contained"
+              onClick={handleSubmit}
+              type="submit"
+              disabled={!formValid}
+            >
+              {t("Prześlij")}
             </Button>
           </Grid>
         </Grid>
