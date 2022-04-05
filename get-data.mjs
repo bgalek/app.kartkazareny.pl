@@ -14,7 +14,7 @@ const sheet = doc.sheetsByIndex[0];
 const rows = await sheet.getRows();
 
 const sheet2 = doc.sheetsByIndex[1];
-const rows2 = await sheet.getRows();
+const rows2 = await sheet2.getRows();
 
 const items = [...rows, ...rows2].filter(it => it['PRZEDMIOT']).map(it => ({
     name: it['PRZEDMIOT'],
