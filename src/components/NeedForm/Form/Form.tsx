@@ -150,11 +150,11 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             }
           />
         </FormControl>
-        <Grid container justifyContent="flex-end" columns={10}>
+        <Grid container justifyContent="flex-end">
           <Grid
             item
-            xs={5}
-            md={1}
+            xs={6}
+            md={2}
             sx={{ display: "flex", justifyContent: "center" }}
           >
             <Button
@@ -168,8 +168,8 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
 
           <Grid
             item
-            xs={5}
-            md={1}
+            xs={6}
+            md={2}
             sx={{ display: "flex", justifyContent: "center" }}
           >
             <Button
@@ -178,7 +178,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
               type="submit"
               disabled={!formValid}
             >
-              {t("Prześlij")}
+              {t("Dodaj")}
             </Button>
           </Grid>
         </Grid>

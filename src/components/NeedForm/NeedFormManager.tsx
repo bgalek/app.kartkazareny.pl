@@ -18,11 +18,11 @@ export const NeedFormManager = (): ReactElement => {
 
   const { needs, addNeed } = useContext(NeedsContext);
 
-  const readCategories = useCallback(async () => {
+  const readCategories = useCallback(() => {
     setCategories(getCategories());
   }, []);
 
-  const readProducts = useCallback(async () => {
+  const readProducts = useCallback(() => {
     setProducts(getProducts());
   }, []);
 
