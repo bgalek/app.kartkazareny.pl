@@ -78,7 +78,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
     <FormGroup>
       <Stack spacing={3}>
         <Autocomplete
-            options={productsFromFile.sort((a, b) => -b.label.localeCompare(a.label))}
+            options={productsFromFile.sort((a, b) => -b.category.localeCompare(a.category))}
             groupBy={(option) => option.category}
             getOptionLabel={(option) => option.label}
             fullWidth
