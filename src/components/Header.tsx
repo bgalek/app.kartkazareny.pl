@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const Header = () => {
     const { t, i18n } = useTranslation();
+    // @ts-ignore
     const languages: string[] = Object.keys(i18n.options.resources);
     return (
         <AppBar position="static">
