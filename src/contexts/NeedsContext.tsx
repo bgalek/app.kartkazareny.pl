@@ -23,7 +23,8 @@ export const NeedsContextProvider = ({
 
   const addNeed = (needToAdd: ProductNeed) => {
     const needToUpdateIndex = needs.findIndex(
-      (need) => need.id === needToAdd.id && need.name === needToAdd.name
+      (need) =>
+        need.id === needToAdd.id && need.volunteer === needToAdd.volunteer
     );
 
     if (needToUpdateIndex === -1) {
