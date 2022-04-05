@@ -28,6 +28,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
       - run: touch dist/.nojekyll
 
       - name: Deploy
