@@ -1,16 +1,16 @@
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 import React, {
   ReactElement,
   useCallback,
   useContext,
   useEffect,
   useState,
-} from 'react';
-import { Category } from '../../@types/helpers/Category';
-import { Product } from '../../@types/helpers/Product';
-import { NeedsContext } from '../../contexts/NeedsContext';
-import { getCategories, getProducts } from '../../helpers/ProductsAPI';
-import Form from './Form/Form';
+} from "react";
+import { Category } from "../../@types/helpers/Category";
+import { Product } from "../../@types/helpers/Product";
+import { NeedsContext } from "../../contexts/NeedsContext";
+import { getCategories, getProducts } from "../../helpers/ProductsAPI";
+import Form from "./Form/Form";
 
 export const NeedFormManager = (): ReactElement => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,19 +18,17 @@ export const NeedFormManager = (): ReactElement => {
 
   const { needs, addNeed } = useContext(NeedsContext);
 
-  const downloadCategories = useCallback(async () => {
-    const downloadedCategories = await getCategories();
-    setCategories(downloadedCategories);
+  const readCategories = useCallback(async () => {
+    setCategories(getCategories());
   }, []);
 
-  const downloadProducts = useCallback(async () => {
-    const downloadedCategories = await getProducts();
-    setProducts(downloadedCategories);
+  const readProducts = useCallback(async () => {
+    setProducts(getProducts());
   }, []);
 
   useEffect(() => {
-    downloadCategories();
-    downloadProducts();
+    readCategories();
+    readProducts();
   }, []);
 
   return (

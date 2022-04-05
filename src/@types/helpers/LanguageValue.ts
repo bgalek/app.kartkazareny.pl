@@ -1,4 +1,4 @@
 export interface LanguageValue {
   PL: string;
-  UA: string;
+  UK: string;
 }
