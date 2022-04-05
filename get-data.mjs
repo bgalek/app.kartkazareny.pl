@@ -27,8 +27,11 @@ const products = [...allProductsRows]
       UK: it["przedmiot uk"],
     },
     category: {
+      id: it["kategoria"],
+      name: {
       PL: it["kategoria"],
       UK: it["kategoria uk"],
+      },
     },
     unit: {
       PL: it["miara"],
