@@ -6,14 +6,14 @@ const categories: Category[] = [
     id: 'Jedzenie',
     name: {
       PL: 'Jedzenie',
-      UK: 'Харчування',
+      UA: 'Харчування',
     },
   },
   {
     id: 'Elektronika',
     name: {
       PL: 'Elektronika',
-      UK: 'Електроніка',
+      UA: 'Електроніка',
     },
   },
 ];
@@ -23,72 +23,72 @@ const products: Product[] = [
     id: 'Mleko',
     name: {
       PL: 'Mleko',
-      UK: 'Молоко',
+      UA: 'Молоко',
     },
     categoryId: 'Jedzenie',
     unit: {
       PL: 'L',
-      UK: '?',
+      UA: '?',
     },
   },
   {
     id: 'Płatki',
     name: {
       PL: 'Płatki',
-      UK: 'Зернові',
+      UA: 'Зернові',
     },
     categoryId: 'kg',
     unit: {
       PL: 'L',
-      UK: '?',
+      UA: '?',
     },
   },
   {
     id: 'Chleb',
     name: {
       PL: 'Chleb',
-      UK: 'Хліб',
+      UA: 'Хліб',
     },
     categoryId: 'Jedzenie',
     unit: {
       PL: 'szt',
-      UK: '?',
+      UA: '?',
     },
   },
   {
     id: 'Bułki',
     name: {
       PL: 'Bułki',
-      UK: 'Булочки',
+      UA: 'Булочки',
     },
     categoryId: 'Jedzenie',
     unit: {
       PL: 'szt',
-      UK: '?',
+      UA: '?',
     },
   },
   {
     id: 'Telefon',
     name: {
       PL: 'Telefon',
-      UK: 'Телефон',
+      UA: 'Телефон',
     },
     categoryId: 'Elektronika',
     unit: {
       PL: 'szt',
-      UK: '?',
+      UA: '?',
     },
   },
   {
     id: 'Lodówka',
     name: {
       PL: 'Lodówka',
-      UK: 'Холодильник',
+      UA: 'Холодильник',
     },
     categoryId: 'Elektronika',
     unit: {
       PL: 'szt',
-      UK: '?',
+      UA: '?',
     },
   },
 ];

@@ -7,10 +7,10 @@ interface Props {
 
 const Layout = ({ children }: Props): ReactElement => (
     <Container maxWidth="sm" component="main" sx={{
-        height: 'calc(100vh - 124px)',
+        height: '100%',
         overflowX: 'clip',
         overflowY: 'scroll',
-        marginTop: 2,
+        paddingTop: 4,
         position: 'relative'
     }}>
         {children}

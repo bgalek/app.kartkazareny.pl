@@ -1,5 +1,6 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useContext, useState } from 'react';
 import {
+  Autocomplete,
   Button,
   FormControl,
   FormControlLabel,
@@ -13,12 +14,13 @@ import {
   Radio,
   RadioGroup,
   Select,
-  Stack,
+  Stack, TextField,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Category } from '../../../@types/helpers/Category';
 import { Product } from '../../../@types/helpers/Product';
 import { Need } from '../../../@types/helpers/Need';
+import data from '../../../../data.json';
 
 interface Props {
   categories: Category[];
@@ -36,6 +38,8 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   const [productInput, setProductInput] = useState<string>('');
   const [amountInput, setAmountInput] = useState<string>('');
 
+  const productsFromFile: {label: string, category: string}[] = data.items.map(it => ({ label: it.name, category: it.category }));
+
   const availableProducts: Product[] =
     categoryInput !== ''
       ? products.filter((product) => product.categoryId === categoryInput)
@@ -43,7 +47,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
 
   const adornment = productInput
     ? products.find((product) => product.id === productInput)?.unit[
-        i18n.language as 'PL' | 'UK'
+        i18n.language as 'PL' | 'UA'
       ]
     : '';
 
@@ -73,6 +77,13 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   return (
     <FormGroup>
       <Stack spacing={3}>
+        <Autocomplete
+            options={productsFromFile.sort((a, b) => -b.label.localeCompare(a.label))}
+            groupBy={(option) => option.category}
+            getOptionLabel={(option) => option.label}
+            fullWidth
+            renderInput={(params) => <TextField {...params} label="Produkty"/>}
+        />
         <FormControl variant={formVariant} required>
           <InputLabel htmlFor='name-input'>{t('Imię')}</InputLabel>
           <Input
@@ -96,7 +107,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
                   key={category.id}
                   value={category.id}
                   control={<Radio />}
-                  label={category.name[i18n.language as 'PL' | 'UK']}
+                  label={category.name[i18n.language as 'PL' | 'UA']}
                 />
               );
             })}
@@ -119,7 +130,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             {availableProducts.map((product) => {
               return (
                 <MenuItem key={product.id} value={product.id}>
-                  {product.name[i18n.language as 'PL' | 'UK']}
+                  {product.name[i18n.language as 'PL' | 'UA']}
                 </MenuItem>
               );
             })}
