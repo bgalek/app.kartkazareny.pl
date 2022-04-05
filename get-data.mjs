@@ -24,18 +24,18 @@ const products = [...allProductsRows]
     id: `${it["przedmiot"]}-${it["kategoria"]}-${it["miara"]}`,
     name: {
       PL: it["przedmiot"],
-      UA: it["przedmiot UA"],
+      UA: it["przedmiot"],
     },
     category: {
       id: it["kategoria"],
       name: {
       PL: it["kategoria"],
-      UA: it["kategoria UA"],
+      UA: it["kategoria"],
       },
     },
     unit: {
       PL: it["miara"],
-      UA: it["miara UA"],
+      UA: it["miara"],
     },
   }));
 
@@ -43,7 +43,7 @@ const categories = [...categoriesRows].map((it) => ({
   id: it["kategoria"],
   name: {
     PL: it["kategoria"],
-    UA: it["kategoria UA"],
+    UA: it["kategoria"],
   },
 }));
 
