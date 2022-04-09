@@ -91,7 +91,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
       <Wrapper>
         <Stack spacing={5}>
           <Typography variant="subtitle1">
-            Formularz do zgłaszania zapotrzebowania na produkty
+            {t("Formularz do zgłaszania zapotrzebowania na produkty")}
           </Typography>
 
           <FormControl required variant={formVariant} fullWidth>
