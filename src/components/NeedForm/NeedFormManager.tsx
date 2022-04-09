@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React, {
   ReactElement,
   useCallback,

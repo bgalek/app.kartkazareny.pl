@@ -16,7 +16,7 @@ import { Category } from "../../../@types/helpers/Category";
 import { Product } from "../../../@types/helpers/Product";
 import { ProductListItem } from "../../../@types/helpers/ProductListItem";
 import { Language } from "../../../@types/shared/Language";
-import { Container } from "../../Container";
+import { Wrapper } from "../../Wrapper";
 import { AmountField } from "./AmountInput/AmountField";
 
 interface Props {
@@ -88,7 +88,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
 
   return (
     <>
-      <Container>
+      <Wrapper>
         <Stack spacing={5}>
           <Typography variant="subtitle1">
             Formularz do zgłaszania zapotrzebowania na produkty
@@ -106,13 +106,13 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             />
           </FormControl>
         </Stack>
-      </Container>
+      </Wrapper>
 
       <Paper
         elevation={0}
         sx={{ backgroundColor: "#E5EDFB", borderRadius: "8px" }}
       >
-        <Container>
+        <Wrapper>
           <Stack spacing={5} alignItems="center">
             <FormControl required variant={formVariant} fullWidth>
               <Autocomplete
@@ -183,7 +183,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
               {t("Dodaj produkt")}
             </Button>
           </Stack>
-        </Container>
+        </Wrapper>
       </Paper>
     </>
   );
