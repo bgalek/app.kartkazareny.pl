@@ -1,0 +1,8 @@
+.layout {
+  max-width: var(--sm);
+  height: 100%;
+  overflow-x: clip;
+  overflow-y: scroll;
+  padding-top: 4px;
+  position: relative;
+}
