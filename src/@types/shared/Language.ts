@@ -1,1 +1,1 @@
-export type Language = "PL" | "UA";
+export type Language = "PL" | "UK";

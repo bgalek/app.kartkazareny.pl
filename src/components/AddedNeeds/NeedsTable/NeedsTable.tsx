@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
+import React, { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Table,
   TableBody,
@@ -7,12 +7,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@mui/material";
-import { ProductNeed } from "../../../@types/helpers/ProductNeed";
-import { Language } from "../../../@types/shared/Language";
+} from '@mui/material';
+import { ProductListItem } from '../../../@types/helpers/ProductListItem';
+import { Language } from '../../../@types/shared/Language';
 
 interface Props {
-  needs: ProductNeed[];
+  needs: ProductListItem[];
 }
 
 export const NeedsTable = ({ needs }: Props): ReactElement => {
