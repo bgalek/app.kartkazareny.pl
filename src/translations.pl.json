@@ -1,11 +1,11 @@
 {
   "Kartka z Areny": "Kartka z Areny",
-  "Imię": "Imię",
-  "Kategoria": "Kategoria",
-  "Produkt": "Produkt",
-  "Ilość": "Ilość",
-  "Dodaj": "Dodaj",
+  "Imię i Nazwisko": "Imię i Nazwisko",
+  "Wybierz kategorię": "Wybierz kategorię",
+  "Wybierz produkt": "Wybierz produkt",
+  "Podaj ilość": "Podaj ilość",
+  "Dodaj produkt": "Dodaj produkt",
   "Prześlij": "Prześlij",
-  "Wyczyść": "Wyczyść",
-  "Wszystkie": "Wszystkie"
+  "Wszystkie": "Wszystkie",
+  "Odejmij": "Odejmij"
 }

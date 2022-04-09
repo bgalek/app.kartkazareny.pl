@@ -1,11 +1,11 @@
 {
   "Kartka z Areny": "Листівка з Арени",
-  "Imię": "Ім'я",
-  "Kategoria": "Категорія",
-  "Produkt": "Продукт",
-  "Ilość": "Кількість",
-  "Dodaj": "Додати",
+  "Imię i Nazwisko": "Ім'я та прізвище",
+  "Wybierz kategorię": "Будь ласка, виберіть категорію",
+  "Wybierz produkt": "Виберіть продукт",
+  "Podaj ilość": "Введіть кількість",
+  "Dodaj produkt": "Додайте продукт",
   "Prześlij": "Подати",
-  "Wyczyść": "Ясно",
-  "Wszystkie": "всі"
+  "Wszystkie": "всі",
+  "Odejmij": "відняти"
 }
