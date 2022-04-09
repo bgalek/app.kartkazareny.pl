@@ -1,13 +1,20 @@
-import React, { ReactElement } from "react";
-import styles from "./Layout.module.css";
-import { Container } from "@mui/material";
+import React, { ReactElement } from 'react';
+import { Container } from '@mui/material';
 
 interface Props {
-  children: ReactElement;
+    children: ReactElement;
 }
 
 const Layout = ({ children }: Props): ReactElement => (
-  <main className={styles.layout}>{children}</main>
+    <Container maxWidth="sm" component="main" sx={{
+        height: '100%',
+        overflowX: 'clip',
+        overflowY: 'scroll',
+        paddingTop: 4,
+        position: 'relative'
+    }}>
+        {children}
+    </Container>
 );
 
 export default Layout;
