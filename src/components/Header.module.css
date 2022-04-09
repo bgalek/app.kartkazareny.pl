@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 24px;
+}
+
+.header__title {
+  font-size: 24px;
+}
+
+.header__actions {
+}
+
+.actions__language_button {
+  height: 36px;
+  width: 36px;
+  margin: 0px 16px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.actions__language_button:disabled {
+  opacity: 0.2;
+}
+
+.actions__language_button-PL {
+  background-image: url(../assets/PL.svg);
+  border: 1px solid red;
+}
+
+.actions__language_button-UK {
+  background-image: url(../assets/UK.svg);
+}

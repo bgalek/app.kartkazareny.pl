@@ -1,31 +1,48 @@
-import React from 'react';
-import { AppBar, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import {
+  AppBar,
+  ToggleButton,
+  ToggleButtonGroup,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import styles from "./Header.module.css";
+import { useTranslation } from "react-i18next";
+import { Language } from "../@types/shared/Language";
 
 const Header = () => {
-    const { t, i18n } = useTranslation();
-    // @ts-ignore
-    const languages: string[] = Object.keys(i18n.options.resources);
-    return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                    {t('Kartka z areny')}
-                </Typography>
-                <ToggleButtonGroup
-                    exclusive
-                    value={i18n.resolvedLanguage}
-                    onChange={(e, lang) => i18n.changeLanguage(lang)}
-                >
-                    {languages.map((lang) => (
-                        <ToggleButton key={lang} value={lang}>
-                            {lang}
-                        </ToggleButton>
-                    ))}
-                </ToggleButtonGroup>
-            </Toolbar>
-        </AppBar>
-    );
+  const { t, i18n } = useTranslation();
+  // @ts-ignore
+  const languages: string[] = Object.keys(i18n.options.resources);
+
+  const handleLanguageChange = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    value: string
+  ) => {
+    event.preventDefault();
+
+    i18n.changeLanguage(value);
+  };
+
+  return (
+    <header className={styles.header}>
+      <span className={styles.header__title}>{t("Kartka z areny")}</span>
+      <div className={styles.header__actions}>
+        {languages.map((lang) => (
+          <button
+            key={lang}
+            value={lang}
+            disabled={i18n.language === lang}
+            onClick={(e) => handleLanguageChange(e, lang)}
+            aria-label={lang}
+            className={`
+                ${styles.actions__language_button} 
+                ${styles["actions__language_button-" + lang]}`}
+          ></button>
+        ))}
+      </div>
+    </header>
+  );
 };
 
 export default Header;
