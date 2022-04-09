@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <span className={styles.header__title}>{t("Kartka z areny")}</span>
+      <span className={styles.header__title}>{t("Kartka z Areny")}</span>
       <div className={styles.header__actions}>
         {languages.map((lang) => (
           <button
