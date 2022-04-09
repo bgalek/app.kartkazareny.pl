@@ -6,11 +6,11 @@ import { NeedsContextProvider } from "./contexts/NeedsContext";
 import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
 import { AddedNeeds } from "./components/AddedNeeds/AddedNeeds";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
-    primary: blueGrey,
+    primary: blue,
   },
 });
 
