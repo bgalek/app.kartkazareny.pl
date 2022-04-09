@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import {
+  Box,
   FormControl,
   Grid,
   IconButton,
@@ -43,14 +44,16 @@ export const AmountField = ({
   return (
     <Grid container justifyContent="flex-end" alignItems="center">
       <Grid item xs={2}>
-        <IconButton
-          aria-label={t("Odejmij")}
-          size="large"
-          color="primary"
-          onClick={() => handleIconsClick("subtract")}
-        >
-          <RemoveCircleOutlinedIcon fontSize="large" />
-        </IconButton>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <IconButton
+            aria-label={t("Odejmij")}
+            size="large"
+            color="primary"
+            onClick={() => handleIconsClick("subtract")}
+          >
+            <RemoveCircleOutlinedIcon fontSize="large" />
+          </IconButton>
+        </Box>
       </Grid>
       <Grid item xs={4}>
         <FormControl variant={variant} required>
@@ -67,14 +70,16 @@ export const AmountField = ({
       </Grid>
 
       <Grid item xs={2}>
-        <IconButton
-          aria-label={t("Dodaj")}
-          size="large"
-          color="primary"
-          onClick={() => handleIconsClick("add")}
-        >
-          <AddCircleOutlinedIcon fontSize="large" />
-        </IconButton>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <IconButton
+            aria-label={t("Dodaj")}
+            size="large"
+            color="primary"
+            onClick={() => handleIconsClick("add")}
+          >
+            <AddCircleOutlinedIcon fontSize="large" />
+          </IconButton>
+        </Box>
       </Grid>
       <Grid item xs={2}>
         <Typography>{adornment}</Typography>
