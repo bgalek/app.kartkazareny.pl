@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  AppBar,
-  ToggleButton,
-  ToggleButtonGroup,
-  Toolbar,
-  Typography,
-} from "@mui/material";
 import styles from "./Header.module.css";
 import { useTranslation } from "react-i18next";
-import { Language } from "../@types/shared/Language";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
