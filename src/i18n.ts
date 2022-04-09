@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import translationPL from "./translations.pl.json";
-import translationUA from "./translations.ua.json";
+import translationUK from "./translations.uk.json";
 
 i18n
   .use(LanguageDetector)
@@ -13,8 +13,8 @@ i18n
       PL: {
         translation: translationPL,
       },
-      UA: {
-        translation: translationUA,
+      UK: {
+        translation: translationUK,
       },
     },
   });

@@ -1,9 +1,9 @@
-import React, { ReactChildren, ReactElement, useState } from "react";
-import { ProductNeed } from "../@types/helpers/ProductNeed";
+import React, { ReactChildren, ReactElement, useState } from 'react';
+import { ProductListItem } from '../@types/helpers/ProductListItem';
 
 interface ContextProps {
-  needs: ProductNeed[];
-  addNeed: (needToAdd: ProductNeed) => void;
+  needs: ProductListItem[];
+  addNeed: (needToAdd: ProductListItem) => void;
 }
 
 interface ProviderProps {
@@ -13,15 +13,15 @@ interface ProviderProps {
 export const NeedsContext = React.createContext<ContextProps>({
   needs: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  addNeed: (needToAdd: ProductNeed) => {},
+  addNeed: (needToAdd: ProductListItem) => {},
 });
 
 export const NeedsContextProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const [needs, setNeeds] = useState<ProductNeed[]>([]);
+  const [needs, setNeeds] = useState<ProductListItem[]>([]);
 
-  const addNeed = (needToAdd: ProductNeed) => {
+  const addNeed = (needToAdd: ProductListItem) => {
     const needToUpdateIndex = needs.findIndex(
       (need) =>
         need.id === needToAdd.id && need.volunteer === needToAdd.volunteer

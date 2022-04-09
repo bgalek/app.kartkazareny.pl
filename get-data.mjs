@@ -1,58 +1,111 @@
-import * as fs from "fs";
-import { GoogleSpreadsheet } from "google-spreadsheet";
+import * as fs from 'fs';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import slugify from 'slug';
+import translate from 'translate-google';
+
+const forceTranslations = {
+  'szt.': 'хамма',
+};
 
 const doc = new GoogleSpreadsheet(
-  "157urwMMADPpPj6ka7l1YRaTaQPgPSamCNS8AYu_wyd0"
+  '1jTYPj_NZ5LcZmPePom_NYX5Aukr0auCm1VCwU0N_5Cw'
 );
 
 await doc.useServiceAccountAuth({
-  client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-  private_key: process.env.GOOGLE_PRIVATE_KEY,
+    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY
 });
 
 await doc.loadInfo();
 
-const allProductsSheet = doc.sheetsByIndex[0];
-const allProductsRows = await allProductsSheet.getRows();
+const fetchedRows = await Promise.all([
+  doc.sheetsByIndex[0].getRows(),
+  await doc.sheetsByIndex[1].getRows(),
+]);
 
-const categoriesSheet = doc.sheetsByIndex[1];
-const categoriesRows = await categoriesSheet.getRows();
+const foodRows = fetchedRows[0].filter((row) => row.PRZEDMIOT != '');
+const otherRows = fetchedRows[1]
+  .filter((row) => row['"PRZEDMIOT"'] != '')
+  .map((row) => {
+    return {
+      PRZEDMIOT: row['"PRZEDMIOT"'],
+      ...row,
+    };
+  });
 
-const products = [...allProductsRows]
-  .filter((it) => it["przedmiot"])
-  .map((it) => ({
-    id: `${it["przedmiot"]}-${it["kategoria"]}-${it["miara"]}`,
+const allRows = [...foodRows, ...otherRows];
+
+// categories
+const categoryStrings = [...new Set(allRows.map((row) => row.Kategoria))];
+const categoryStringsUK = await translate(categoryStrings, {
+  from: 'pl',
+  to: 'uk',
+});
+
+const categories = {};
+categoryStrings.forEach((category, index) => {
+  categories[slugify(category)] = {
+    PL: category,
+    UK: assignTranslation(category, categoryStringsUK[index]),
+  };
+});
+
+writeToFile('./categories_data.json', categories);
+
+// products
+const products = [...allRows].reduce((acc, entry) => {
+  const productId = slugify(
+    `${entry['PRZEDMIOT']}-${entry['Kategoria']}-${entry['Miara']}`
+  );
+  const categporyId = slugify(entry['Kategoria']);
+  acc[productId] = {
     name: {
-      PL: it["przedmiot"],
-      UA: it["przedmiot"],
+      PL: entry['PRZEDMIOT'],
+      UK: entry['PRZEDMIOT'],
     },
     category: {
-      id: it["kategoria"],
-      name: {
-      PL: it["kategoria"],
-      UA: it["kategoria"],
-      },
+      id: categporyId,
+      name: categories[categporyId],
     },
     unit: {
-      PL: it["miara"],
-      UA: it["miara"],
+      PL: entry['Miara'],
+      UK: entry['Miara'],
     },
-  }));
+  };
+  return acc;
+}, {});
 
-const categories = [...categoriesRows].map((it) => ({
-  id: it["kategoria"],
-  name: {
-    PL: it["kategoria"],
-    UA: it["kategoria"],
-  },
+const batch = Object.entries(products).map((entry) => ({
+  id: entry[0],
+  productName: entry[1].name.UK,
+  productUnit: entry[1].unit.UK,
 }));
+const translatedBatch = await translate(batch, {
+  from: 'pl',
+  to: 'uk',
+  except: ['id'],
+});
 
-fs.writeFileSync(
-  "./categories_data.json",
-  JSON.stringify({ createdAt: new Date(), items: categories }, null, 2)
-);
+translatedBatch.forEach((translation) => {
+  products[translation.id].name.UK = assignTranslation(
+    products[translation.id].name.UK,
+    translation.productName
+  );
+  products[translation.id].unit.UK = assignTranslation(
+    products[translation.id].unit.UK,
+    translation.productUnit
+  );
+});
 
-fs.writeFileSync(
-  "./products_data.json",
-  JSON.stringify({ createdAt: new Date(), items: products }, null, 2)
-);
+writeToFile('./products_data.json', products);
+
+function assignTranslation(original, translated) {
+  return forceTranslations[original] || translated;
+}
+
+function writeToFile(filePath, items) {
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify({ createdAt: new Date(), items }, null, 2)
+  );
+}

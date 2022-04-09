@@ -3,6 +3,6 @@ import { Product } from "../@types/helpers/Product";
 import productData from "../../products_data.json";
 import categoriesData from "../../categories_data.json";
 
-export const getProducts = (): Product[] => productData.items;
+export const getProducts = (): Product[] =>  Object.entries(productData.items).map(it => ({ ...it[1], id: it[0] }))
 
-export const getCategories = (): Category[] => categoriesData.items;
+export const getCategories = (): Category[] => Object.entries(categoriesData.items).map(it => ({ name: {...it[1]}, id: it[0] }));
