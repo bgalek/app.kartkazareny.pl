@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Layout from "./components/Layout";
 import { NeedsContextProvider } from "./contexts/NeedsContext";
 import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
-import { AddedNeeds } from "./components/AddedNeeds/AddedNeeds";
+import { AddedProducts } from "./components/AddedProducts/AddedProducts";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
@@ -23,7 +23,7 @@ function App() {
         <Layout>
           <NeedsContextProvider>
             <NeedFormManager />
-            <AddedNeeds />
+            <AddedProducts />
           </NeedsContextProvider>
         </Layout>
       </div>

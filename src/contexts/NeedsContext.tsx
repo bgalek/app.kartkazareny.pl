@@ -1,5 +1,5 @@
-import React, { ReactChildren, ReactElement, useState } from 'react';
-import { ProductListItem } from '../@types/helpers/ProductListItem';
+import React, { ReactChildren, ReactElement, useState } from "react";
+import { ProductListItem } from "../@types/helpers/ProductListItem";
 
 interface ContextProps {
   needs: ProductListItem[];
@@ -19,7 +19,68 @@ export const NeedsContext = React.createContext<ContextProps>({
 export const NeedsContextProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const [needs, setNeeds] = useState<ProductListItem[]>([]);
+  const [needs, setNeeds] = useState<ProductListItem[]>([
+    {
+      name: {
+        PL: "opakowania rękawiczek lateksowych M",
+        UK: "Перець невелика сумочка",
+      },
+      category: {
+        id: "art-higieniczne",
+        name: {
+          PL: "Art. higieniczne",
+          UK: "Мистецтво. Гігієнічний",
+        },
+      },
+      unit: {
+        PL: "szt.",
+        UK: "хамма",
+      },
+      id: "opakowania-rekawiczek-lateksowych-m-art-higieniczne-szt",
+      volunteer: "Dawid",
+      amount: 3,
+    },
+    {
+      name: {
+        PL: "opakowania rękawiczek lateksowych M",
+        UK: "Перець невелика сумочка",
+      },
+      category: {
+        id: "art-higieniczne",
+        name: {
+          PL: "Art. higieniczne",
+          UK: "Мистецтво. Гігієнічний",
+        },
+      },
+      unit: {
+        PL: "szt.",
+        UK: "хамма",
+      },
+      id: "opakowania-rekawiczek-lateksowych-m-art-higieniczne-szt2",
+      volunteer: "Dawid",
+      amount: 3,
+    },
+    {
+      name: {
+        PL: "opakowania rękawiczek lateksowych Mopakowania rękawiczek lateksowych Mopakowania rękawiczek lateksowych Mopakowania rękawiczek lateksowych Mopakowania rękawiczek lateksowych Mopakowania rękawiczek lateksowych M",
+        UK: "Перець невелика сумочка",
+      },
+      category: {
+        id: "art-higieniczne",
+        name: {
+          PL: "Art. higieniczne",
+          UK: "Мистецтво. Гігієнічний",
+        },
+      },
+      unit: {
+        PL: "szt.",
+        UK: "хамма",
+      },
+      id: "opakowania-rekawiczek-lateksowych-m-art-higieniczne-szt3",
+      volunteer: "Dawid",
+      amount: 3,
+    },
+  ]);
 
   const addNeed = (needToAdd: ProductListItem) => {
     const needToUpdateIndex = needs.findIndex(

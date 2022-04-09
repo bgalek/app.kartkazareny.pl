@@ -1,0 +1,10 @@
+.wrapper {
+  padding-bottom: 0px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+}
