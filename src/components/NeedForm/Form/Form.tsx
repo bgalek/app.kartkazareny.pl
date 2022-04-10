@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Autocomplete,
   Button,
@@ -10,8 +11,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
-import { useTranslation } from "react-i18next";
 import { Category } from "../../../@types/helpers/Category";
 import { Product } from "../../../@types/helpers/Product";
 import { ProductListItem } from "../../../@types/helpers/ProductListItem";
@@ -176,7 +175,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             <Button
               disabled={!formValid}
               variant="contained"
-              sx={{ width: "180px", height: "40px" }}
+              sx={{ padding: "12px" }}
               type="submit"
               onClick={handleSubmit}
             >
