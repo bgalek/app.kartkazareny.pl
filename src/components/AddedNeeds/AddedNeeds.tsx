@@ -1,9 +1,9 @@
 import React, { ReactElement, useContext } from "react";
 import { NeedsContext } from "../../contexts/NeedsContext";
-import { NeededProductsList } from "./NeededProductsList/NeededProductsList";
+import { NeedsList } from "./NeededsList/NeedsList";
 import { SendNeeds } from "./SubmitNeeds/SendNeeds";
 
-export const AddedProducts = (): ReactElement => {
+export const AddedNeeds = (): ReactElement => {
   const { needs, deleteNeed } = useContext(NeedsContext);
 
   const handleSend = (): void => {
@@ -12,7 +12,7 @@ export const AddedProducts = (): ReactElement => {
 
   return (
     <>
-      <NeededProductsList needs={needs} deleteNeed={deleteNeed} />
+      <NeedsList needs={needs} deleteNeed={deleteNeed} />
       <SendNeeds disabled={needs.length === 0} onClick={handleSend}></SendNeeds>
     </>
   );

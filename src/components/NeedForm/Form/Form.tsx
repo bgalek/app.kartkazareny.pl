@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Category } from "../../../@types/helpers/Category";
 import { Product } from "../../../@types/helpers/Product";
-import { ProductListItem } from "../../../@types/helpers/ProductListItem";
+import { Need } from "../../../@types/helpers/Need";
 import { Language } from "../../../@types/shared/Language";
 import { Wrapper } from "../../Wrapper";
 import { AmountField } from "./AmountInput/AmountField";
@@ -21,7 +21,7 @@ import { AmountField } from "./AmountInput/AmountField";
 interface Props {
   categories: Category[];
   products: Product[];
-  onSubmit: (need: ProductListItem) => void;
+  onSubmit: (need: Need) => void;
 }
 
 const formVariant = "outlined";
@@ -59,7 +59,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   };
 
   const handleSubmit = (): void => {
-    const elementToAdd: ProductListItem = {
+    const elementToAdd: Need = {
       ...(productInput as Product),
       volunteer: nameInput,
       amount: +amountInput,

@@ -1,20 +1,17 @@
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./NeededProductsList.module.css";
+import styles from "./NeedsList.module.css";
 import { Typography } from "@mui/material";
-import { ProductListItem } from "../../../@types/helpers/ProductListItem";
+import { Need } from "../../../@types/helpers/Need";
 import { Wrapper } from "../../Wrapper";
-import { ProductListRow } from "./NeedsListItem/ProductListRow";
+import { NeedsListItem } from "./NeedsListItem/NeedslistItem";
 
 interface Props {
-  needs: ProductListItem[];
+  needs: Need[];
   deleteNeed: (index: number) => void;
 }
 
-export const NeededProductsList = ({
-  needs,
-  deleteNeed,
-}: Props): ReactElement => {
+export const NeedsList = ({ needs, deleteNeed }: Props): ReactElement => {
   const { t } = useTranslation();
 
   return (
@@ -25,7 +22,7 @@ export const NeededProductsList = ({
       {needs.length !== 0 && (
         <ul className={styles.list}>
           {needs.map((product, index) => (
-            <ProductListRow
+            <NeedsListItem
               key={product.id}
               product={product}
               first={index === 0}
