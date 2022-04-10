@@ -1,22 +1,28 @@
-import { Button } from "@mui/material";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@mui/material";
+import { Wrapper } from "../../Wrapper";
 
 interface Props {
   onClick: () => void;
+  disabled?: boolean;
 }
 
-export const SendNeeds = ({ onClick }: Props): ReactElement => {
+export const SendNeeds = ({ onClick, disabled }: Props): ReactElement => {
   const { t } = useTranslation();
 
   return (
-    <Button
-      variant="contained"
-      onClick={onClick}
-      color="success"
-      sx={{ marginTop: "16px", width: "100%" }}
-    >
-      {t("Prześlij")}
-    </Button>
+    <Wrapper>
+      <Button
+        variant="contained"
+        onClick={onClick}
+        color="secondary"
+        sx={{ paddingTop: "12px", paddingBottom: "12px" }}
+        disabled={disabled}
+        fullWidth
+      >
+        {t("Prześlij do weryfikacji")}
+      </Button>
+    </Wrapper>
   );
 };

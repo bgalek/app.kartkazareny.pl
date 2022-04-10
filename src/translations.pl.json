@@ -1,11 +1,13 @@
 {
-  "Kartka z areny": "Kartka z areny",
-  "Imię": "Imię",
-  "Kategoria": "Kategoria",
-  "Produkt": "Produkt",
-  "Ilość": "Ilość",
-  "Dodaj": "Dodaj",
-  "Prześlij": "Prześlij",
-  "Wyczyść": "Wyczyść",
-  "Wszystkie": "Wszystkie"
+  "Kartka z Areny": "Kartka z Areny",
+  "Imię i Nazwisko": "Imię i Nazwisko",
+  "Wybierz kategorię": "Wybierz kategorię",
+  "Wybierz produkt": "Wybierz produkt",
+  "Brak opcji": "Brak opcji",
+  "Podaj ilość": "Podaj ilość",
+  "Dodaj produkt": "Dodaj produkt",
+  "Prześlij do weryfikacji": "Prześlij do weryfikacji",
+  "Wszystkie": "Wszystkie",
+  "Odejmij": "Odejmij",
+  "Formularz do zgłaszania zapotrzebowania na produkty": "Formularz do zgłaszania zapotrzebowania na produkty"
 }

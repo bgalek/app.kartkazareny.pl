@@ -1,11 +1,13 @@
 {
-  "Kartka z areny": "Листівка з арени",
-  "Imię": "Ім'я",
-  "Kategoria": "Категорія",
-  "Produkt": "Продукт",
-  "Ilość": "Кількість",
-  "Dodaj": "Додати",
-  "Prześlij": "Подати",
-  "Wyczyść": "Ясно",
-  "Wszystkie": "всі"
+  "Kartka z Areny": "Листівка з Арени",
+  "Imię i Nazwisko": "Ім'я та прізвище",
+  "Wybierz kategorię": "Будь ласка, виберіть категорію",
+  "Wybierz produkt": "Виберіть продукт",
+  "Brak opcji": "Немає варіантів",
+  "Podaj ilość": "Введіть кількість",
+  "Dodaj produkt": "Додайте продукт",
+  "Prześlij do weryfikacji": "Подати на перевірку",
+  "Wszystkie": "всі",
+  "Odejmij": "відняти",
+  "Formularz do zgłaszania zapotrzebowania na produkty": "Форма для подання попиту на продукцію"
 }

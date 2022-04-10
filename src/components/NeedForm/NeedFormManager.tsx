@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React, {
   ReactElement,
   useCallback,
@@ -16,7 +15,7 @@ export const NeedFormManager = (): ReactElement => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { needs, addNeed } = useContext(NeedsContext);
+  const { addNeed } = useContext(NeedsContext);
 
   const readCategories = useCallback(() => {
     setCategories(getCategories());
