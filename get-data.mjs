@@ -52,12 +52,31 @@ categoryStrings.forEach((category, index) => {
 
 writeToFile('./categories_data.json', categories);
 
+// units
+const unitStrings = [...new Set(allRows.map((row) => row.Miara))];
+const unitStringsUK = await translate(unitStrings, {
+  from: 'pl',
+  to: 'uk',
+});
+
+const units = {};
+unitStrings.forEach((unit, index) => {
+  units[slugify(unit)] = {
+    PL: unit,
+    UK: assignTranslation(unit, unitStringsUK[index]),
+  };
+});
+
+writeToFile('./units_data.json', units);
+
 // products
 const products = [...allRows].reduce((acc, entry) => {
   const productId = slugify(
     `${entry['PRZEDMIOT']}-${entry['Kategoria']}-${entry['Miara']}`
   );
   const categporyId = slugify(entry['Kategoria']);
+  const unitId = slugify(entry['Miara']);
+
   acc[productId] = {
     name: {
       PL: entry['PRZEDMIOT'],
@@ -67,33 +86,35 @@ const products = [...allRows].reduce((acc, entry) => {
       id: categporyId,
       name: categories[categporyId],
     },
-    unit: {
-      PL: entry['Miara'],
-      UK: entry['Miara'],
-    },
+    unit: units[unitId],
   };
   return acc;
 }, {});
 
 const batch = Object.entries(products).map((entry) => ({
   id: entry[0],
-  productName: entry[1].name.UK,
-  productUnit: entry[1].unit.UK,
+  product: entry[1].name.UK,
 }));
-const translatedBatch = await translate(batch, {
-  from: 'pl',
-  to: 'uk',
-  except: ['id'],
-});
+
+// we need to split the batch because of Google Translate translation length limitations
+const splittedBatch = split(batch, 30);
+
+// Google Translate is not allowung many request from single IP at once, so we need to translate in sequence
+const translatedBatch = [];
+for (const chunk of splittedBatch) {
+  const translatedChunk = await translate(chunk, {
+    from: 'pl',
+    to: 'uk',
+    except: ['id'],
+  });
+
+  translatedBatch.push(...translatedChunk);
+}
 
 translatedBatch.forEach((translation) => {
   products[translation.id].name.UK = assignTranslation(
     products[translation.id].name.UK,
-    translation.productName
-  );
-  products[translation.id].unit.UK = assignTranslation(
-    products[translation.id].unit.UK,
-    translation.productUnit
+    translation.product
   );
 });
 
@@ -101,6 +122,16 @@ writeToFile('./products_data.json', products);
 
 function assignTranslation(original, translated) {
   return forceTranslations[original] || translated;
+}
+
+function split(arr, len) {
+  let chunks = [],
+    i = 0,
+    n = arr.length;
+  while (i < n) {
+    chunks.push(arr.slice(i, (i += len)));
+  }
+  return chunks;
 }
 
 function writeToFile(filePath, items) {
