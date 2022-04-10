@@ -1,6 +1,7 @@
-import { Button } from "@mui/material";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@mui/material";
+import { Wrapper } from "../../Wrapper";
 
 interface Props {
   onClick: () => void;
@@ -10,13 +11,16 @@ export const SendNeeds = ({ onClick }: Props): ReactElement => {
   const { t } = useTranslation();
 
   return (
-    <Button
-      variant="contained"
-      onClick={onClick}
-      color="success"
-      sx={{ marginTop: "16px", width: "100%" }}
-    >
-      {t("Prześlij")}
-    </Button>
+    <Wrapper>
+      <Button
+        variant="contained"
+        onClick={onClick}
+        color="primary"
+        sx={{ paddingTop: "12px", paddingBottom: "12px" }}
+        fullWidth
+      >
+        {t("Prześlij do weryfikacji")}
+      </Button>
+    </Wrapper>
   );
 };
