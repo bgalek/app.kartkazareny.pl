@@ -48,11 +48,6 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   const [productInput, setProductInput] = useState<Product | null>(null);
   const [amountInput, setAmountInput] = useState<string>("");
 
-  const availableProducts: Product[] =
-    categoryInput.id !== "all"
-      ? products.filter((product) => product.category.id === categoryInput.id)
-      : products;
-
   const resetForm = (fullReset = false) => {
     setCategoryInput(allCategory);
     setAmountInput("");
@@ -87,6 +82,11 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
     setProductInput(null);
     setCategoryInput(value);
   };
+
+  const availableProducts: Product[] =
+    categoryInput.id !== "all"
+      ? products.filter((product) => product.category.id === categoryInput.id)
+      : products;
 
   const formValid = productInput && nameInput.length != 0 && +amountInput > 0;
 

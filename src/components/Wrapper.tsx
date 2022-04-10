@@ -1,6 +1,5 @@
-import { Container, SxProps } from "@mui/material";
 import React, { ReactElement } from "react";
-import styles from "./Wrapper.module.css";
+import { Container, SxProps } from "@mui/material";
 
 interface Props {
   children: ReactElement | ReactElement[];

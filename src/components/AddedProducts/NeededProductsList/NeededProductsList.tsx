@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import styles from "./NeededProductsList.module.css";
 import { useTranslation } from "react-i18next";
+import styles from "./NeededProductsList.module.css";
 import { Typography } from "@mui/material";
 import { ProductListItem } from "../../../@types/helpers/ProductListItem";
 import { Wrapper } from "../../Wrapper";

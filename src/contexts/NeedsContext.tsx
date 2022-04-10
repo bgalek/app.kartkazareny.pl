@@ -11,69 +11,6 @@ interface ProviderProps {
   children: ReactChildren | ReactElement | ReactElement[];
 }
 
-const MOCK_NEEDS = [
-  {
-    name: {
-      PL: "łyżki duże plastikowe",
-      UK: "Lodowa / Mysłowa",
-    },
-    category: {
-      id: "naczynia-i-sztucce",
-      name: {
-        PL: "Naczynia i sztućce",
-        UK: "Страви та столові прилади",
-      },
-    },
-    unit: {
-      PL: "szt.",
-      UK: "хамма",
-    },
-    id: "lyzki-duze-plastikowe-naczynia-i-sztucce-szt",
-    volunteer: "Dawid Tomczak",
-    amount: 12,
-  },
-  {
-    name: {
-      PL: "widelce plastikowe",
-      UK: "червоний перець",
-    },
-    category: {
-      id: "naczynia-i-sztucce",
-      name: {
-        PL: "Naczynia i sztućce",
-        UK: "Страви та столові прилади",
-      },
-    },
-    unit: {
-      PL: "szt.",
-      UK: "хамма",
-    },
-    id: "widelce-plastikowe-naczynia-i-sztucce-szt",
-    volunteer: "Dawid Tomczak",
-    amount: 3,
-  },
-  {
-    name: {
-      PL: "kubeczki do ciepłych napojów papierowe/styropianowe",
-      UK: "Різні фруктові трубки (не доза)",
-    },
-    category: {
-      id: "naczynia-i-sztucce",
-      name: {
-        PL: "Naczynia i sztućce",
-        UK: "Страви та столові прилади",
-      },
-    },
-    unit: {
-      PL: "szt.",
-      UK: "хамма",
-    },
-    id: "kubeczki-do-cieplych-napojow-papierowestyropianowe-naczynia-i-sztucce-szt",
-    volunteer: "Dawid Tomczak",
-    amount: 100,
-  },
-];
-
 export const NeedsContext = React.createContext<ContextProps>({
   needs: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
@@ -85,7 +22,7 @@ export const NeedsContext = React.createContext<ContextProps>({
 export const NeedsContextProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const [needs, setNeeds] = useState<ProductListItem[]>(MOCK_NEEDS);
+  const [needs, setNeeds] = useState<ProductListItem[]>([]);
 
   const addNeed = (needToAdd: ProductListItem) => {
     const needToUpdateIndex = needs.findIndex(

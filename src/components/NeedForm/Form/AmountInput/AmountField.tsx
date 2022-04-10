@@ -1,4 +1,5 @@
 import React, { Dispatch, ReactElement, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   FormControl,
@@ -10,7 +11,6 @@ import {
 } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
-import { useTranslation } from "react-i18next";
 
 interface Props {
   amountInput: string;
@@ -25,7 +25,7 @@ export const AmountField = ({
   variant,
   adornment,
 }: Props): ReactElement => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleIconsClick = (operation: "add" | "subtract") => {
     setAmountInput((amount) => {
