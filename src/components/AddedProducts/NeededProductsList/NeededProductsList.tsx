@@ -19,19 +19,21 @@ export const NeededProductsList = ({
 
   return (
     <>
-      <Wrapper>
+      <Wrapper sx={{ paddingBottom: "0px" }}>
         <Typography>{`${t("Lista Produktów")} (${needs.length})`}</Typography>
       </Wrapper>
-      <ul className={styles.list}>
-        {needs.map((product, index) => (
-          <ProductListRow
-            key={product.id}
-            product={product}
-            first={index === 0}
-            onDelete={() => deleteNeed(index)}
-          />
-        ))}
-      </ul>
+      {needs.length !== 0 && (
+        <ul className={styles.list}>
+          {needs.map((product, index) => (
+            <ProductListRow
+              key={product.id}
+              product={product}
+              first={index === 0}
+              onDelete={() => deleteNeed(index)}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 };
