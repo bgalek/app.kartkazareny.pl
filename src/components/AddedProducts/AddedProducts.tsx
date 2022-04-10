@@ -13,7 +13,7 @@ export const AddedProducts = (): ReactElement => {
   return (
     <>
       <NeededProductsList needs={needs} deleteNeed={deleteNeed} />
-      <SendNeeds onClick={handleSend}></SendNeeds>
+      <SendNeeds disabled={needs.length === 0} onClick={handleSend}></SendNeeds>
     </>
   );
 };

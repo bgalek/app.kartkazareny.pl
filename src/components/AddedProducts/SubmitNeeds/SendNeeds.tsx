@@ -5,9 +5,10 @@ import { Wrapper } from "../../Wrapper";
 
 interface Props {
   onClick: () => void;
+  disabled?: boolean;
 }
 
-export const SendNeeds = ({ onClick }: Props): ReactElement => {
+export const SendNeeds = ({ onClick, disabled }: Props): ReactElement => {
   const { t } = useTranslation();
 
   return (
@@ -17,6 +18,7 @@ export const SendNeeds = ({ onClick }: Props): ReactElement => {
         onClick={onClick}
         color="secondary"
         sx={{ paddingTop: "12px", paddingBottom: "12px" }}
+        disabled={disabled}
         fullWidth
       >
         {t("Prześlij do weryfikacji")}
