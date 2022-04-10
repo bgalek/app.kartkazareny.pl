@@ -4,7 +4,7 @@ import styles from "./NeedsList.module.css";
 import { Typography } from "@mui/material";
 import { Need } from "../../../@types/helpers/Need";
 import { Wrapper } from "../../Wrapper";
-import { NeedsListItem } from "./NeedsListItem/NeedslistItem";
+import { NeedsListItem } from "./NeedsListItem/NeedsListItem";
 
 interface Props {
   needs: Need[];
