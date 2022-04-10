@@ -71,7 +71,6 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   };
 
   const handleCategoryChange = (
-    event: React.SyntheticEvent<Element, Event>,
     value: Category
   ): void => {
     // handling autocomplete clearing
@@ -122,7 +121,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
               <Autocomplete
                 value={categoryInput}
                 defaultValue={allCategory}
-                onChange={handleCategoryChange}
+                onChange={(event, value) => handleCategoryChange(value as Category)}
                 noOptionsText={t("brak opcji")}
                 options={[allCategory, ...categories]}
                 isOptionEqualToValue={(option, value) => {
