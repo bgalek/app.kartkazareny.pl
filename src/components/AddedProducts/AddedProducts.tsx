@@ -4,7 +4,7 @@ import { NeededProductsList } from "./NeededProductsList/NeededProductsList";
 import { SendNeeds } from "./SubmitNeeds/SendNeeds";
 
 export const AddedProducts = (): ReactElement => {
-  const { needs } = useContext(NeedsContext);
+  const { needs, deleteNeed } = useContext(NeedsContext);
 
   const handleSend = (): void => {
     console.log(needs);
@@ -12,12 +12,7 @@ export const AddedProducts = (): ReactElement => {
 
   return (
     <>
-      <NeededProductsList
-        needs={needs}
-        deleteNeed={(index) => {
-          console.log(index);
-        }}
-      />
+      <NeededProductsList needs={needs} deleteNeed={deleteNeed} />
       <SendNeeds onClick={handleSend}></SendNeeds>
     </>
   );

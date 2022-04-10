@@ -15,9 +15,8 @@ export const NeededProductsList = ({
   needs,
   deleteNeed,
 }: Props): ReactElement => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  console.log("needs :>> ", needs);
   return (
     <>
       <Wrapper>
