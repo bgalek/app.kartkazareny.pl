@@ -79,6 +79,11 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
     event: React.SyntheticEvent<Element, Event>,
     value: Category
   ): void => {
+    // handling autocomplete clearing
+    if (!value) {
+      value = allCategory;
+    }
+
     setProductInput(null);
     setCategoryInput(value);
   };
@@ -116,7 +121,9 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             <FormControl required variant={formVariant} fullWidth>
               <Autocomplete
                 value={categoryInput}
+                defaultValue={allCategory}
                 onChange={handleCategoryChange}
+                noOptionsText={t("brak opcji")}
                 options={[allCategory, ...categories]}
                 isOptionEqualToValue={(option, value) => {
                   return option.id === value.id;
@@ -144,6 +151,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
               <Autocomplete
                 value={productInput}
                 onChange={(event, value) => setProductInput(value)}
+                noOptionsText={t("brak opcji")}
                 options={availableProducts}
                 groupBy={(option) =>
                   option.category.name[i18n.language as Language]
