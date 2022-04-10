@@ -1,23 +1,23 @@
 import React from "react";
-import styles from "./App.module.css";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import { NeedsContextProvider } from "./contexts/NeedsContext";
 import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
 import { AddedProducts } from "./components/AddedProducts/AddedProducts";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { blue, indigo } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
     primary: blue,
+    secondary: indigo,
   },
 });
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className={styles.wrapper}>
+      <Box sx={{ padding: "24px 16px" }}>
         <Header />
         <CssBaseline />
         <Layout>
@@ -26,7 +26,7 @@ function App() {
             <AddedProducts />
           </NeedsContextProvider>
         </Layout>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }

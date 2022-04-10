@@ -15,7 +15,7 @@ export const SendNeeds = ({ onClick }: Props): ReactElement => {
       <Button
         variant="contained"
         onClick={onClick}
-        color="primary"
+        color="secondary"
         sx={{ paddingTop: "12px", paddingBottom: "12px" }}
         fullWidth
       >
