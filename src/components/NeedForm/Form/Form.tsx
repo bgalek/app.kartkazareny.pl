@@ -88,7 +88,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper sx={{ paddingTop: "0px" }}>
         <Stack spacing={5}>
           <Typography variant="subtitle1">
             {t("Formularz do zgłaszania zapotrzebowania na produkty")}
