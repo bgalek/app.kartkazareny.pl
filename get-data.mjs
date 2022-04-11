@@ -18,22 +18,12 @@ await doc.useServiceAccountAuth({
 
 await doc.loadInfo();
 
-const fetchedRows = await Promise.all([
+let allRows = await Promise.all([
   doc.sheetsByIndex[0].getRows(),
   await doc.sheetsByIndex[1].getRows(),
 ]);
 
-const foodRows = fetchedRows[0].filter((row) => row.PRZEDMIOT != '');
-const otherRows = fetchedRows[1]
-  .filter((row) => row['"PRZEDMIOT"'] != '')
-  .map((row) => {
-    return {
-      PRZEDMIOT: row['"PRZEDMIOT"'],
-      ...row,
-    };
-  });
-
-const allRows = [...foodRows, ...otherRows];
+allRows = allRows.flat().filter((row) => row['PRZEDMIOT'] != '');
 
 // categories
 const categoryStrings = [...new Set(allRows.map((row) => row.Kategoria))];
