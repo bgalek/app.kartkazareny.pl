@@ -20,6 +20,8 @@ interface Props {
   min?: number;
 }
 
+let debounceTimer: NodeJS.Timeout;
+
 export const AmountField = ({
   amountInput,
   setAmountInput,
@@ -39,12 +41,35 @@ export const AmountField = ({
         numberAmount = numberAmount - 1;
       }
 
-      if (min && numberAmount <= min) {
+      if (min && numberAmount < min) {
         return amount;
       }
 
       return numberAmount.toString();
     });
+  };
+
+  const handleManualChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
+    if (!min) {
+      setAmountInput(value);
+      return;
+    }
+
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+
+    if (+value < min || isNaN(+value)) {
+      setAmountInput(value);
+
+      debounceTimer = setTimeout(() => {
+        setAmountInput(min.toString());
+      }, 2000);
+    } else {
+      setAmountInput(value);
+    }
   };
 
   return (
@@ -56,6 +81,7 @@ export const AmountField = ({
             size="large"
             color="primary"
             onClick={() => handleIconsClick("subtract")}
+            disabled={min !== undefined && +amountInput <= min}
           >
             <RemoveCircleOutlinedIcon fontSize="large" />
           </IconButton>
@@ -67,7 +93,7 @@ export const AmountField = ({
           <OutlinedInput
             value={amountInput}
             type="number"
-            onChange={(event) => setAmountInput(event.target.value)}
+            onChange={handleManualChange}
             id="amount-input"
             aria-describedby="amount-input"
             label={t("Podaj ilość")}
