@@ -28,7 +28,6 @@ const formVariant = "outlined";
 
 const namePlaceholder = {
   PL: "Jan Kowalski",
-  // TODO ask for placeholder
   UK: "Иван Петрович",
 };
 
@@ -46,11 +45,11 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
   const [nameInput, setNameInput] = useState<string>("");
   const [categoryInput, setCategoryInput] = useState<Category>(allCategory);
   const [productInput, setProductInput] = useState<Product | null>(null);
-  const [amountInput, setAmountInput] = useState<string>("");
+  const [amountInput, setAmountInput] = useState<string>("1");
 
   const resetForm = (fullReset = false) => {
     setCategoryInput(allCategory);
-    setAmountInput("");
+    setAmountInput("1");
     setProductInput(null);
 
     if (fullReset) {
@@ -185,6 +184,7 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
               amountInput={amountInput}
               setAmountInput={setAmountInput}
               adornment={productInput?.unit[i18n.language as Language]}
+              min={1}
             />
 
             <Button

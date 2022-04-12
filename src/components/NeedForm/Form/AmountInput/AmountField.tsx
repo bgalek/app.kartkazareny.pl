@@ -17,6 +17,7 @@ interface Props {
   setAmountInput: Dispatch<SetStateAction<string>>;
   variant: "standard" | "outlined" | "filled";
   adornment?: string;
+  min?: number;
 }
 
 export const AmountField = ({
@@ -24,6 +25,7 @@ export const AmountField = ({
   setAmountInput,
   variant,
   adornment,
+  min,
 }: Props): ReactElement => {
   const { t } = useTranslation();
 
@@ -35,6 +37,10 @@ export const AmountField = ({
         numberAmount = numberAmount + 1;
       } else {
         numberAmount = numberAmount - 1;
+      }
+
+      if (min && numberAmount <= min) {
+        return amount;
       }
 
       return numberAmount.toString();
@@ -65,6 +71,7 @@ export const AmountField = ({
             id="amount-input"
             aria-describedby="amount-input"
             label={t("Podaj ilość")}
+            inputProps={{ inputMode: "numeric", min: 1 }}
           />
         </FormControl>
       </Grid>
