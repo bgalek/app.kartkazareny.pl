@@ -29,7 +29,7 @@ const formVariant = "outlined";
 const namePlaceholder = {
   PL: "Jan Kowalski",
   // TODO ask for placeholder
-  UK: "Jan Kowalski",
+  UK: "Иван Петрович",
 };
 
 const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
@@ -70,15 +70,19 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
     resetForm();
   };
 
-  const handleCategoryChange = (
-    value: Category
-  ): void => {
+  const handleProductChange = (value: Product): void => {
+    setProductInput(value);
+    setCategoryInput(value.category);
+  };
+
+  const handleCategoryChange = (value: Category): void => {
     // handling autocomplete clearing
     if (!value) {
       value = allCategory;
+    } else if (value.id !== productInput?.category.id) {
+      setProductInput(null);
     }
 
-    setProductInput(null);
     setCategoryInput(value);
   };
 
@@ -117,30 +121,6 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
       >
         <Wrapper>
           <Stack spacing={5} alignItems="center">
-            <FormControl required variant={formVariant} fullWidth>
-              <Autocomplete
-                value={categoryInput}
-                defaultValue={allCategory}
-                onChange={(event, value) => handleCategoryChange(value as Category)}
-                noOptionsText={t("brak opcji")}
-                options={[allCategory, ...categories]}
-                isOptionEqualToValue={(option, value) => {
-                  return option.id === value.id;
-                }}
-                getOptionLabel={(option) =>
-                  option.name[i18n.language as Language]
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    id="category-input"
-                    label={t("Wybierz kategorię")}
-                    required
-                  />
-                )}
-              />
-            </FormControl>
-
             <FormControl
               variant={formVariant}
               required
@@ -149,7 +129,9 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
             >
               <Autocomplete
                 value={productInput}
-                onChange={(event, value) => setProductInput(value)}
+                onChange={(event, value) =>
+                  handleProductChange(value as Product)
+                }
                 noOptionsText={t("brak opcji")}
                 options={availableProducts}
                 groupBy={(option) =>
@@ -167,6 +149,32 @@ const Form = ({ categories, products, onSubmit }: Props): ReactElement => {
                     label={t("Wybierz produkt")}
                     required
                     id="product-input"
+                  />
+                )}
+              />
+            </FormControl>
+
+            <FormControl required variant={formVariant} fullWidth>
+              <Autocomplete
+                value={categoryInput}
+                defaultValue={allCategory}
+                onChange={(event, value) =>
+                  handleCategoryChange(value as Category)
+                }
+                noOptionsText={t("brak produktu")}
+                options={[allCategory, ...categories]}
+                isOptionEqualToValue={(option, value) => {
+                  return option.id === value.id;
+                }}
+                getOptionLabel={(option) =>
+                  option.name[i18n.language as Language]
+                }
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    id="category-input"
+                    label={t("Wybierz kategorię")}
+                    required
                   />
                 )}
               />
