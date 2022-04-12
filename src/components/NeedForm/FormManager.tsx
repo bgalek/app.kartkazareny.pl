@@ -5,17 +5,26 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { Stack } from "@mui/material";
 import { Category } from "../../@types/helpers/Category";
 import { Product } from "../../@types/helpers/Product";
 import { NeedsContext } from "../../contexts/NeedsContext";
 import { getCategories, getProducts } from "../../helpers/ProductsAPI";
-import Form from "./Form/Form";
+import { Wrapper } from "../Wrapper";
+import NeedForm from "./Form/NeedForm";
+import { VolunteerField } from "./Form/VolunteerField";
 
-export const NeedFormManager = (): ReactElement => {
+export const FormManager = (): ReactElement => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { addNeed } = useContext(NeedsContext);
+  const { addNeed, setVolunteer, volunteer } = useContext(NeedsContext);
+
+  const handleVolunteerChange = (data: string) => {
+    if (data !== volunteer) {
+      setVolunteer(data);
+    }
+  };
 
   const readCategories = useCallback(() => {
     setCategories(getCategories());
@@ -31,6 +40,17 @@ export const NeedFormManager = (): ReactElement => {
   }, []);
 
   return (
-    <Form onSubmit={addNeed} categories={categories} products={products} />
+    <>
+      <Wrapper sx={{ paddingTop: "0px" }}>
+        <Stack spacing={5}>
+          <VolunteerField onChange={handleVolunteerChange} value={volunteer} />
+        </Stack>
+      </Wrapper>
+      <NeedForm
+        onSubmit={addNeed}
+        categories={categories}
+        products={products}
+      />
+    </>
   );
 };

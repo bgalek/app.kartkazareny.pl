@@ -3,6 +3,8 @@ import { Need } from "../@types/helpers/Need";
 
 interface ContextProps {
   needs: Need[];
+  volunteer: string;
+  setVolunteer: React.Dispatch<React.SetStateAction<string>>;
   addNeed: (needToAdd: Need) => void;
   deleteNeed: (index: number) => void;
   resetNeeds: () => void;
@@ -14,6 +16,9 @@ interface ProviderProps {
 
 export const NeedsContext = React.createContext<ContextProps>({
   needs: [],
+  volunteer: "",
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  setVolunteer: (value: string) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   addNeed: (needToAdd: Need) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
@@ -25,11 +30,11 @@ export const NeedsContextProvider = ({
   children,
 }: ProviderProps): ReactElement => {
   const [needs, setNeeds] = useState<Need[]>([]);
+  const [volunteer, setVolunteer] = useState<string>("");
 
   const addNeed = (needToAdd: Need) => {
     const needToUpdateIndex = needs.findIndex(
-      (need) =>
-        need.id === needToAdd.id && need.volunteer === needToAdd.volunteer
+      (need) => need.id === needToAdd.id
     );
 
     if (needToUpdateIndex === -1) {
@@ -56,7 +61,16 @@ export const NeedsContextProvider = ({
   };
 
   return (
-    <NeedsContext.Provider value={{ needs, addNeed, deleteNeed, resetNeeds }}>
+    <NeedsContext.Provider
+      value={{
+        needs,
+        addNeed,
+        deleteNeed,
+        resetNeeds,
+        setVolunteer,
+        volunteer,
+      }}
+    >
       {children}
     </NeedsContext.Provider>
   );

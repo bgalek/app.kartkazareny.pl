@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Layout from "./components/Layout";
 import { NeedsContextProvider } from "./contexts/NeedsContext";
 import { SnackbarContextProvider } from "./contexts/SnackbarContext";
-import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
+import { FormManager } from "./components/NeedForm/FormManager";
 import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { blue, indigo } from "@mui/material/colors";
 import { SendNeeds } from "./components/SendNeeds";
@@ -29,7 +29,7 @@ function App() {
           <NeedsContextProvider>
             <SnackbarContextProvider>
               <Layout>
-                <NeedFormManager />
+                <FormManager />
                 <NeedsList />
               </Layout>
               <Layout sx={{ position: "sticky", bottom: "24px" }}>

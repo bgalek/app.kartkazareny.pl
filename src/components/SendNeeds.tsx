@@ -8,7 +8,7 @@ import { postNeeds } from "../helpers/ArenaAPI";
 
 export const SendNeeds = (): ReactElement => {
   const { t } = useTranslation();
-  const { needs, resetNeeds } = useContext(NeedsContext);
+  const { needs, resetNeeds, volunteer } = useContext(NeedsContext);
   const { showSnackbar } = useContext(SnackbarContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -16,7 +16,7 @@ export const SendNeeds = (): ReactElement => {
     setIsLoading(true);
 
     try {
-      await postNeeds(needs);
+      await postNeeds(needs, volunteer);
     } catch {
       setIsLoading(false);
       showSnackbar(t("Coś poszło nie tak, spróbuj ponownie za chwilę"), true);
@@ -28,10 +28,6 @@ export const SendNeeds = (): ReactElement => {
     showSnackbar(t("Zapotrzebowanie wysłane!"));
   };
 
-  const onClick = () => {
-    console.log(needs);
-  };
-
   return (
     <Wrapper sx={{ paddingBottom: "0px", paddingTop: "0px" }}>
       <LoadingButton
@@ -39,7 +35,7 @@ export const SendNeeds = (): ReactElement => {
         onClick={handleSend}
         color="secondary"
         sx={{ paddingTop: "12px", paddingBottom: "12px", zIndex: 200 }}
-        disabled={needs.length === 0}
+        disabled={needs.length === 0 || volunteer.length === 0}
         loading={isLoading}
         fullWidth
       >
