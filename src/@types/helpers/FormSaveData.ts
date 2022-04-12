@@ -1,5 +1,7 @@
 export interface FormSaveData {
+  volunteer: string;
+  product: string;
   category: string;
-  itemName: string;
-  count: number;
+  amount: number;
+  unit: string;
 }

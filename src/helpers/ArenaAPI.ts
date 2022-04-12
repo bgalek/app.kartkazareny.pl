@@ -2,22 +2,20 @@ import { FormSaveData } from "../@types/helpers/FormSaveData";
 import { Need } from "../@types/helpers/Need";
 import { NEEDS_CONTROLLER } from "../consts";
 
-const createPostOptions = (body: any) => ({
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(body),
-});
-
 export const postNeeds = (needs: Need[]): Promise<any> => {
   const saveData: FormSaveData[] = needs.map((item) => ({
+    volunteer: item.volunteer,
     category: item.category.name.PL,
-    itemName: item.name.PL,
-    count: item.amount,
+    product: item.name.PL,
+    amount: item.amount,
+    unit: item.unit.PL,
   }));
 
-  return Promise.all(
-    saveData.map((element) =>
-      fetch(NEEDS_CONTROLLER, createPostOptions(element))
-    )
-  );
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ needs: saveData }),
+  };
+
+  return fetch(NEEDS_CONTROLLER, options);
 };
