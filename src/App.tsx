@@ -6,6 +6,7 @@ import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
 import { AddedNeeds } from "./components/AddedNeeds/AddedNeeds";
 import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { blue, indigo } from "@mui/material/colors";
+import { SnackbarContextProvider } from "./contexts/SnackbarContext";
 
 const theme = createTheme({
   palette: {
@@ -21,10 +22,12 @@ function App() {
         <Header />
         <CssBaseline />
         <Layout>
-          <NeedsContextProvider>
-            <NeedFormManager />
-            <AddedNeeds />
-          </NeedsContextProvider>
+          <SnackbarContextProvider>
+            <NeedsContextProvider>
+              <NeedFormManager />
+              <AddedNeeds />
+            </NeedsContextProvider>
+          </SnackbarContextProvider>
         </Layout>
       </Box>
     </ThemeProvider>

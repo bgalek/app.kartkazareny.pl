@@ -5,6 +5,7 @@ interface ContextProps {
   needs: Need[];
   addNeed: (needToAdd: Need) => void;
   deleteNeed: (index: number) => void;
+  resetNeeds: () => void;
 }
 
 interface ProviderProps {
@@ -17,6 +18,7 @@ export const NeedsContext = React.createContext<ContextProps>({
   addNeed: (needToAdd: Need) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   deleteNeed: (index: number) => {},
+  resetNeeds: () => {},
 });
 
 export const NeedsContextProvider = ({
@@ -49,8 +51,12 @@ export const NeedsContextProvider = ({
     });
   };
 
+  const resetNeeds = (): void => {
+    setNeeds([]);
+  };
+
   return (
-    <NeedsContext.Provider value={{ needs, addNeed, deleteNeed }}>
+    <NeedsContext.Provider value={{ needs, addNeed, deleteNeed, resetNeeds }}>
       {children}
     </NeedsContext.Provider>
   );
