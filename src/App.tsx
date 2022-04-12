@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import { NeedsContextProvider } from "./contexts/NeedsContext";
+import { SnackbarContextProvider } from "./contexts/SnackbarContext";
 import { NeedFormManager } from "./components/NeedForm/NeedFormManager";
 import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { blue, indigo } from "@mui/material/colors";
@@ -26,16 +27,15 @@ function App() {
         <CssBaseline />
         <main>
           <NeedsContextProvider>
-            <Layout>
-              <NeedFormManager />
-              <NeedsList />
-            </Layout>
-            <Layout
-              className="sticky-portal"
-              sx={{ position: "sticky", bottom: "24px" }}
-            >
-              <SendNeeds />
-            </Layout>
+            <SnackbarContextProvider>
+              <Layout>
+                <NeedFormManager />
+                <NeedsList />
+              </Layout>
+              <Layout sx={{ position: "sticky", bottom: "24px" }}>
+                <SendNeeds />
+              </Layout>
+            </SnackbarContextProvider>
           </NeedsContextProvider>
         </main>
       </Box>
