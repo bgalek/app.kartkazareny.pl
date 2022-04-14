@@ -73,25 +73,22 @@ const NeedForm = ({ categories, products, onSubmit }: Props): ReactElement => {
             fullWidth
           >
             <Autocomplete
-              // the product needs to be null, not undefined, because value === undefined is considered in MUI as uncontrolled input
               value={state.product}
-              disableClearable={true}
-              onChange={(event, value) =>
+              id="product-input"
+              onChange={(event, value: Product | null) =>
                 dispatch({
                   type: ActionType.PRODUCT_CHANGE,
-                  payload: value as Product,
+                  payload: value,
                 })
               }
-              noOptionsText={t("brak opcji")}
               options={availableProducts}
-              groupBy={(option) =>
-                option.category.name[i18n.language as Language]
-              }
               getOptionLabel={(option) =>
                 option.name[i18n.language as Language]
               }
-              fullWidth
-              id="product-input"
+              groupBy={(option) =>
+                option.category.name[i18n.language as Language]
+              }
+              noOptionsText={t("brak opcji")}
               renderInput={(params) => (
                 <TextField
                   {...params}

@@ -1,10 +1,11 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Box,
   FormControl,
   Grid,
   IconButton,
+  InputBaseComponentProps,
   InputLabel,
   OutlinedInput,
   Typography,
@@ -21,6 +22,7 @@ interface Props {
 }
 
 let debounceTimer: NodeJS.Timeout;
+let inputProps: InputBaseComponentProps = { inputMode: "numeric" };
 
 export const AmountField = ({
   value,
@@ -30,6 +32,14 @@ export const AmountField = ({
   min,
 }: Props): ReactElement => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (min) {
+      inputProps.min = min;
+    } else {
+      delete inputProps.min;
+    }
+  }, [min]);
 
   const handleIconsClick = (operation: "add" | "subtract") => {
     let numberAmount = +value;
@@ -95,7 +105,7 @@ export const AmountField = ({
             id="amount-input"
             aria-describedby="amount-input"
             label={t("Podaj ilość")}
-            inputProps={{ inputMode: "numeric", min: 1 }}
+            inputProps={inputProps}
           />
         </FormControl>
       </Grid>

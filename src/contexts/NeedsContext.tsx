@@ -4,7 +4,7 @@ import { Need } from "../@types/helpers/Need";
 interface ContextProps {
   needs: Need[];
   volunteer: string;
-  setVolunteer: React.Dispatch<React.SetStateAction<string>>;
+  assignVolunteer: (value: string) => void;
   addNeed: (needToAdd: Need) => void;
   deleteNeed: (index: number) => void;
   resetNeeds: () => void;
@@ -18,7 +18,7 @@ export const NeedsContext = React.createContext<ContextProps>({
   needs: [],
   volunteer: "",
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  setVolunteer: (value: string) => {},
+  assignVolunteer: (value: string) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   addNeed: (needToAdd: Need) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
@@ -60,6 +60,10 @@ export const NeedsContextProvider = ({
     setNeeds([]);
   };
 
+  const assignVolunteer = (value: string) => {
+    setVolunteer(value);
+  };
+
   return (
     <NeedsContext.Provider
       value={{
@@ -67,7 +71,7 @@ export const NeedsContextProvider = ({
         addNeed,
         deleteNeed,
         resetNeeds,
-        setVolunteer,
+        assignVolunteer,
         volunteer,
       }}
     >

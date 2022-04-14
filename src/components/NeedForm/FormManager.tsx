@@ -13,16 +13,17 @@ import { getCategories, getProducts } from "../../helpers/ProductsAPI";
 import { Wrapper } from "../Wrapper";
 import NeedForm from "./Form/NeedForm";
 import { VolunteerField } from "./Form/VolunteerField";
+import { FormHeader } from "./FormHeader";
 
 export const FormManager = (): ReactElement => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { addNeed, setVolunteer, volunteer } = useContext(NeedsContext);
+  const { addNeed, assignVolunteer, volunteer } = useContext(NeedsContext);
 
   const handleVolunteerChange = (data: string) => {
     if (data !== volunteer) {
-      setVolunteer(data);
+      assignVolunteer(data);
     }
   };
 
@@ -43,6 +44,7 @@ export const FormManager = (): ReactElement => {
     <>
       <Wrapper sx={{ paddingTop: "0px" }}>
         <Stack spacing={5}>
+          <FormHeader />
           <VolunteerField onChange={handleVolunteerChange} value={volunteer} />
         </Stack>
       </Wrapper>

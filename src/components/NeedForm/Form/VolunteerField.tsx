@@ -11,11 +11,6 @@ interface Props {
 export const VolunteerField = ({ value, onChange }: Props): ReactElement => {
   const { t, i18n } = useTranslation();
 
-  const namePlaceholder = {
-    PL: "Jan Kowalski",
-    UK: "Иван Петрович",
-  };
-
   return (
     <FormControl required variant="outlined" fullWidth>
       <InputLabel htmlFor="name-input">{t("Imię i Nazwisko")}</InputLabel>
@@ -25,7 +20,7 @@ export const VolunteerField = ({ value, onChange }: Props): ReactElement => {
         id="name-input"
         aria-describedby="name-input"
         label={t("Imię i Nazwisko")}
-        placeholder={namePlaceholder[i18n.language as Language]}
+        placeholder={t("Jan Kowalski")}
       />
     </FormControl>
   );

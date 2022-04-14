@@ -22,11 +22,12 @@ interface ReducerAction {
 export const reducer = (state: FormState, action: ReducerAction): FormState => {
   switch (action.type) {
     case ActionType.PRODUCT_CHANGE:
-      const productPayload = action.payload as Product;
+      const productPayload = action.payload as Product | null;
+
       return {
         ...state,
         product: productPayload,
-        category: productPayload.category,
+        category: productPayload?.category || state.category,
       };
 
     case ActionType.CATEGORY_CHANGE:
