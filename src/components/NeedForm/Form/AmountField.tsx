@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, SetStateAction } from "react";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Box,
@@ -13,8 +13,8 @@ import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
 
 interface Props {
-  amountInput: string;
-  setAmountInput: Dispatch<SetStateAction<string>>;
+  value: string;
+  onChange: (value: string) => void;
   variant: "standard" | "outlined" | "filled";
   adornment?: string;
   min?: number;
@@ -23,8 +23,8 @@ interface Props {
 let debounceTimer: NodeJS.Timeout;
 
 export const AmountField = ({
-  amountInput,
-  setAmountInput,
+  value,
+  onChange,
   variant,
   adornment,
   min,
@@ -32,28 +32,26 @@ export const AmountField = ({
   const { t } = useTranslation();
 
   const handleIconsClick = (operation: "add" | "subtract") => {
-    setAmountInput((amount) => {
-      let numberAmount = +amount;
+    let numberAmount = +value;
 
-      if (operation === "add") {
-        numberAmount = numberAmount + 1;
-      } else {
-        numberAmount = numberAmount - 1;
-      }
+    if (operation === "add") {
+      numberAmount = numberAmount + 1;
+    } else {
+      numberAmount = numberAmount - 1;
+    }
 
-      if (min && numberAmount < min) {
-        return amount;
-      }
+    if (min && numberAmount < min) {
+      return value;
+    }
 
-      return numberAmount.toString();
-    });
+    onChange(numberAmount.toString());
   };
 
   const handleManualChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     if (!min) {
-      setAmountInput(value);
+      onChange(value);
       return;
     }
 
@@ -62,13 +60,13 @@ export const AmountField = ({
     }
 
     if (+value < min || isNaN(+value)) {
-      setAmountInput(value);
+      onChange(value);
 
       debounceTimer = setTimeout(() => {
-        setAmountInput(min.toString());
+        onChange(min.toString());
       }, 2000);
     } else {
-      setAmountInput(value);
+      onChange(value);
     }
   };
 
@@ -81,7 +79,7 @@ export const AmountField = ({
             size="large"
             color="primary"
             onClick={() => handleIconsClick("subtract")}
-            disabled={min !== undefined && +amountInput <= min}
+            disabled={min !== undefined && +value <= min}
           >
             <RemoveCircleOutlinedIcon fontSize="large" />
           </IconButton>
@@ -91,7 +89,7 @@ export const AmountField = ({
         <FormControl variant={variant} required>
           <InputLabel htmlFor="amount-input">{t("Podaj ilość")}</InputLabel>
           <OutlinedInput
-            value={amountInput}
+            value={value}
             type="number"
             onChange={handleManualChange}
             id="amount-input"

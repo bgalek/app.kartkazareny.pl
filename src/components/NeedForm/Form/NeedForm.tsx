@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Autocomplete,
@@ -14,6 +14,7 @@ import { Need } from "../../../@types/helpers/Need";
 import { Language } from "../../../@types/shared/Language";
 import { Wrapper } from "../../Wrapper";
 import { AmountField } from "./AmountField";
+import { ActionType, reducer } from "./NeedFormReducer";
 
 interface Props {
   categories: Category[];
@@ -32,49 +33,31 @@ const NeedForm = ({ categories, products, onSubmit }: Props): ReactElement => {
     },
   };
 
-  const [categoryInput, setCategoryInput] = useState<Category>(allCategory);
-  const [productInput, setProductInput] = useState<Product | null>(null);
-  const [amountInput, setAmountInput] = useState<string>("1");
-
-  const resetForm = () => {
-    setCategoryInput(allCategory);
-    setAmountInput("1");
-    setProductInput(null);
+  const initialFormState = {
+    product: null,
+    category: allCategory,
+    amount: "1",
   };
+
+  const [state, dispatch] = useReducer(reducer, initialFormState);
 
   const handleSubmit = (): void => {
     const formData: Need = {
-      ...(productInput as Product),
-      amount: +amountInput,
+      ...(state.product as Product),
+      amount: +state.amount,
     };
 
     onSubmit(formData);
 
-    resetForm();
-  };
-
-  const handleProductChange = (value: Product): void => {
-    setProductInput(value);
-    setCategoryInput(value.category);
-  };
-
-  const handleCategoryChange = (value: Category): void => {
-    // handling autocomplete clearing
-    if (!value) {
-      value = allCategory;
-    } else if (value.id !== productInput?.category.id) {
-      setProductInput(null);
-    }
-
-    setCategoryInput(value);
+    dispatch({ type: ActionType.RESET, payload: initialFormState });
   };
 
   const availableProducts: Product[] =
-    categoryInput.id !== "all"
-      ? products.filter((product) => product.category.id === categoryInput.id)
+    state.category.id !== "all"
+      ? products.filter((product) => product.category.id === state.category.id)
       : products;
 
-  const formValid = productInput && +amountInput > 0;
+  const formValid = state.product && +state.amount > 0;
 
   return (
     <Paper
@@ -90,8 +73,15 @@ const NeedForm = ({ categories, products, onSubmit }: Props): ReactElement => {
             fullWidth
           >
             <Autocomplete
-              value={productInput}
-              onChange={(event, value) => handleProductChange(value as Product)}
+              // the product needs to be null, not undefined, because value === undefined is considered in MUI as uncontrolled input
+              value={state.product}
+              disableClearable={true}
+              onChange={(event, value) =>
+                dispatch({
+                  type: ActionType.PRODUCT_CHANGE,
+                  payload: value as Product,
+                })
+              }
               noOptionsText={t("brak opcji")}
               options={availableProducts}
               groupBy={(option) =>
@@ -116,10 +106,14 @@ const NeedForm = ({ categories, products, onSubmit }: Props): ReactElement => {
 
           <FormControl required variant="outlined" fullWidth>
             <Autocomplete
-              value={categoryInput}
+              value={state.category}
               defaultValue={allCategory}
+              disableClearable={true}
               onChange={(event, value) =>
-                handleCategoryChange(value as Category)
+                dispatch({
+                  type: ActionType.CATEGORY_CHANGE,
+                  payload: value as Category,
+                })
               }
               noOptionsText={t("brak produktu")}
               options={[allCategory, ...categories]}
@@ -142,9 +136,14 @@ const NeedForm = ({ categories, products, onSubmit }: Props): ReactElement => {
 
           <AmountField
             variant="outlined"
-            amountInput={amountInput}
-            setAmountInput={setAmountInput}
-            adornment={productInput?.unit[i18n.language as Language]}
+            value={state.amount}
+            onChange={(value) =>
+              dispatch({
+                type: ActionType.AMOUNT_CHANGE,
+                payload: value as string,
+              })
+            }
+            adornment={state.product?.unit[i18n.language as Language]}
             min={1}
           />
 
