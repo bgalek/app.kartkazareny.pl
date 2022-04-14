@@ -65,6 +65,7 @@ export const SnackbarContextProvider = ({
           open={snackbarData.isVisible}
           autoHideDuration={4000}
           onClose={hideSnackbar}
+          anchorOrigin={{ horizontal: "left", vertical: "top" }}
         >
           <Alert
             onClose={hideSnackbar}

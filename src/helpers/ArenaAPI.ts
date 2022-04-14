@@ -2,9 +2,9 @@ import { FormSaveData } from "../@types/helpers/FormSaveData";
 import { Need } from "../@types/helpers/Need";
 import { NEEDS_CONTROLLER } from "../consts";
 
-export const postNeeds = (needs: Need[]): Promise<any> => {
+export const postNeeds = (needs: Need[], volunteer: string): Promise<any> => {
   const saveData: FormSaveData[] = needs.map((item) => ({
-    volunteer: item.volunteer,
+    volunteer: volunteer,
     category: item.category.name.PL,
     product: item.name.PL,
     amount: item.amount,

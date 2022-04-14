@@ -3,8 +3,8 @@ import styles from "./NeedsListItem.module.css";
 import { useTranslation } from "react-i18next";
 import { Box, Grid, IconButton } from "@mui/material";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
-import { Need } from "../../../../@types/helpers/Need";
-import { Language } from "../../../../@types/shared/Language";
+import { Need } from "../../../@types/helpers/Need";
+import { Language } from "../../../@types/shared/Language";
 
 interface Props {
   product: Need;

@@ -3,7 +3,7 @@
   "Imię i Nazwisko": "Ім'я та прізвище",
   "Wybierz kategorię": "Будь ласка, виберіть категорію",
   "Wybierz produkt": "Виберіть продукт",
-  "Brak opcji": "Немає варіантів",
+  "Brak produktu": "Відсутність товару",
   "Podaj ilość": "Введіть кількість",
   "Dodaj produkt": "Додайте продукт",
   "Prześlij do weryfikacji": "Подати на перевірку",
@@ -11,5 +11,6 @@
   "Odejmij": "відняти",
   "Formularz do zgłaszania zapotrzebowania na produkty": "Форма для подання попиту на продукцію",
   "Zapotrzebowanie wysłane!": "Запит надіслано!",
-  "Coś poszło nie tak, spróbuj ponownie za chwilę": "Сталася помилка. Спробуйте ще раз за мить"
+  "Coś poszło nie tak, spróbuj ponownie za chwilę": "Сталася помилка. Спробуйте ще раз за мить",
+  "Jan Kowalski": "Иван Петрович"
 }

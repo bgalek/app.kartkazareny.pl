@@ -3,7 +3,7 @@
   "Imię i Nazwisko": "Imię i Nazwisko",
   "Wybierz kategorię": "Wybierz kategorię",
   "Wybierz produkt": "Wybierz produkt",
-  "Brak opcji": "Brak opcji",
+  "Brak produktu": "Brak produktu",
   "Podaj ilość": "Podaj ilość",
   "Dodaj produkt": "Dodaj produkt",
   "Prześlij do weryfikacji": "Prześlij do weryfikacji",
@@ -11,5 +11,6 @@
   "Odejmij": "Odejmij",
   "Formularz do zgłaszania zapotrzebowania na produkty": "Formularz do zgłaszania zapotrzebowania na produkty",
   "Zapotrzebowanie wysłane!": "Zapotrzebowanie wysłane!",
-  "Coś poszło nie tak, spróbuj ponownie za chwilę": "Coś poszło nie tak, spróbuj ponownie za chwilę"
+  "Coś poszło nie tak, spróbuj ponownie za chwilę": "Coś poszło nie tak, spróbuj ponownie za chwilę",
+  "Jan Kowalski": "Jan Kowalski"
 }
