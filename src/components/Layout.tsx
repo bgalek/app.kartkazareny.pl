@@ -1,24 +1,26 @@
 import React, { ReactElement } from "react";
-import { Container } from "@mui/material";
+import { Container, SxProps } from "@mui/material";
 
 interface Props {
-  children: ReactElement;
+  children?: ReactElement | ReactElement[];
+  sx?: SxProps;
 }
 
-const Layout = ({ children }: Props): ReactElement => (
-  <Container
-    maxWidth="sm"
-    component="main"
-    sx={{
-      height: "100%",
-      overflowX: "clip",
-      overflowY: "scroll",
-      paddingTop: "24px",
-      position: "relative",
-    }}
-  >
-    {children}
-  </Container>
-);
+const Layout = ({ sx, children }: Props): ReactElement => {
+  const containerSx = {
+    height: "100%",
+    overflowX: "none",
+    overflowY: "scroll",
+    paddingTop: "24px",
+    position: "relative",
+    ...sx,
+  } as SxProps;
+
+  return (
+    <Container sx={containerSx} maxWidth="sm">
+      {children}
+    </Container>
+  );
+};
 
 export default Layout;
