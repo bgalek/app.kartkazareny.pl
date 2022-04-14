@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="”manifest”" href="data:application/json;base64,ewogICJuYW1lIjogIkthcnRrYSB6IEFyZW55IiwKICAic2hvcnRfbmFtZSI6ICJLYXJ0a2EiLAogICJzdGFydF91cmwiOiAiaW5kZXguaHRtbCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl83Mi5wbmciLAogICAgICAic2l6ZXMiOiAiNzJ4NzIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl85Ni5wbmciLAogICAgICAic2l6ZXMiOiAiOTZ4OTYiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xMjAucG5nIiwKICAgICAgInNpemVzIjogIjEyMHgxMjAiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xMjgucG5nIiwKICAgICAgInNpemVzIjogIjEyOHgxMjgiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xNDQucG5nIiwKICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xNTIucG5nIiwKICAgICAgInNpemVzIjogIjE1MngxNTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xODAucG5nIiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8xOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl8zODQucG5nIiwKICAgICAgInNpemVzIjogIjM4NHgzODQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogInNyYy9hc3NldHMvaWNvbnMvaWNvbl81MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXSwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjRkZGRkZGIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAidGhlbWVfY29sb3IiOiAiI0ZGRkZGRiIKfQo=" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/assets/icon_transparent.90e8c0d2.svg"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app.kartkazareny.pl</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
-  <script type="module" crossorigin src="/assets/index.62a0bc09.js"></script>
-  <link rel="stylesheet" href="/assets/index.2bdfbdc0.css">
-</head>
-<body>
-<div id="root"></div>
-
-</body>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <script type="module" crossorigin src="/assets/index.f3276888.js"></script>
+    <link rel="stylesheet" href="/assets/index.2bdfbdc0.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('serviceWorker.js').then(
+            function (registration) {
+              console.log(
+                'ServiceWorker registration successful with scope:',
+                registration.scope
+              );
+            },
+            function (err) {
+              console.log('ServiceWorker registration failed: ', err);
+            }
+          );
+        });
+      }
+    </script>
+  </body>
 </html>
