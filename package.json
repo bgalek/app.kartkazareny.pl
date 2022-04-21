@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "start": "vite",
-    "prebuild": "node get-data.mjs",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -32,6 +32,7 @@
     "postcss": "^8.4.12",
     "sugarss": "^4.0.1",
     "typescript": "^4.6.3",
-    "vite": "^2.9.1"
+    "vite": "^2.9.1",
+    "vite-plugin-pwa": "^0.11.13"
   }
 }
