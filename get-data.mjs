@@ -32,6 +32,11 @@ allRows = allRows
     Miara: row.Miara || "Brak",
   }));
 
+allRows.sort(
+  (a, b) =>
+    a.Kategoria.localeCompare(b.Kategoria) ||
+    a.PRZEDMIOT.localeCompare(b.PRZEDMIOT)
+);
 // categories
 const categoryStrings = [...new Set(allRows.map((row) => row.Kategoria))];
 const categoryStringsUK = await translate(categoryStrings, {
